@@ -1,7 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 define('CUSTOMERS_FILE_PATH', 'customers-100000.csv');
 
+=======
+define('CUSTOMERS_FILE_PATH', 'customers-100.csv');
+>>>>>>> 3106562358ef2b757645e600badb7a7c655fe3df
 
 function get_hundred_customers_data()
 {
