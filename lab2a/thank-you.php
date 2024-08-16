@@ -1,0 +1,104 @@
+
+<?php
+
+require "helpers/helper-functions.php";
+
+session_start();
+
+
+$email = $_POST['email'];
+$password = $_POST['password'];
+$agree = $_POST['agree'];
+
+$fullname = $_SESSION['fullname'];
+$birthdate = $_SESSION['birthdate'];
+$age = $_SESSION['age'];
+$contact_number = $_SESSION['contact_number'];
+$sex = $_SESSION['sex'];
+$program = $_SESSION['program'];
+$address = $_SESSION['address'];
+#$email = $_SESSION['email'];
+$_SESSION['email'] = $email;
+$_SESSION['password'] = sha1($password);
+$_SESSION['agree'] = $agree;
+
+
+$csvFilePath = '../lab2b/registrations.csv';
+$file = fopen($csvFilePath, 'a');
+
+fputcsv($file, [
+    $fullname,
+    $birthdate,
+    $age,
+    $contact_number,
+    $sex,
+    $program,
+    $address,
+    $email
+]);
+
+fclose($file);
+
+
+$form_data = $_SESSION;
+
+#dump_session();
+
+session_destroy();
+
+
+?>
+
+
+<html>
+
+<head>
+<meta charset="utf-8">
+    <title>IPT10 Laboratory Activity #2</title>
+    <link rel="icon" href="https://phpsandbox.io/assets/img/brand/phpsandbox.png">
+    <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-4.15.0.min.css" />   
+</head>
+<body>
+
+<section class="p-section--hero">
+  <div class="row--50-50-on-large">
+    <div class="col">
+      <div class="p-section--shallow">
+        <h1>
+          Thank You Page
+        </h1>
+      </div>
+      <div class="p-section--shallow">
+      
+        <table aria-label="Session Data">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+
+            foreach ($_SESSION as $key => $val):
+            ?>
+                <tr>
+                    <th><?php echo $key; ?></th>
+                    <td>
+                      <?php echo htmlspecialchars($val); ?>
+                    </td>
+                </tr>
+            <?php
+            endforeach;
+            ?>
+            </tbody>
+        </table>
+      
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
