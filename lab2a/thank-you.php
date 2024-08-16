@@ -18,7 +18,6 @@ $contact_number = $_SESSION['contact_number'];
 $sex = $_SESSION['sex'];
 $program = $_SESSION['program'];
 $address = $_SESSION['address'];
-#$email = $_SESSION['email'];
 $_SESSION['email'] = $email;
 $_SESSION['password'] = sha1($password);
 $_SESSION['agree'] = $agree;
